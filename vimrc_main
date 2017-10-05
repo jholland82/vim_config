@@ -1,0 +1,80 @@
+" Cross-platform Vim Configuration goes in this file
+"
+" Contents
+" Main configuration
+" Visual Configuration
+" Shortcut Key Configuration
+" Plugin Configuration
+
+" ----------- Main Configuration ----------------------------------
+
+source ~/.vim/keymap.vim
+source ~/.vim/vundle.vim
+
+set shell=/bin/bash
+set nocompatible                         "don't need to keep compatibility with Vi
+filetype plugin indent on                "enable detection, plugins and indenting in one step
+syntax on                                "Turn on syntax highlighting
+set ruler                                "Turn on the ruler
+set number                               "Show line numbers
+set relativenumber                       "Show the line number relative to the cursor
+set cursorline                           "underline the current line in the file
+set cursorcolumn                         "highlight the current column. Visible in GUI mode only.
+set colorcolumn=121
+set laststatus=2
+set clipboard=unnamed                    "use system clipboard
+set background=dark                      "make vim use colors that look good on a dark background
+
+set showcmd                              "show incomplete cmds down the bottom
+set showmode                             "show current mode down the bottom
+set foldenable                           "enable folding
+set showmatch                            "set show matching parenthesis
+set noexrc                               "don't use the local config
+set incsearch                            "find the next match as we type the search
+set hlsearch                             "hilight searches by default
+set ignorecase                           "ignore case when searching
+
+set shiftwidth=2                         "number of spaces to use in each autoindent step
+set tabstop=2                            "four tab spaces
+"set softtabstop=4                        "number of spaces to skip or insert when <BS>ing or <Tab>ing
+set expandtab                            "spaces instead of tabs for better cross-editor compatibility
+set smarttab                             "use shiftwidth and softtabstop to insert or delete (on <BS>) blanks
+set shiftround                           "when at 3 spaces, and I hit > ... go to 4, not 5
+set nowrap                               "no wrapping
+
+set backspace=indent,eol,start           "allow backspacing over everything in insert mode
+set cindent                              "recommended seting for automatic C-style indentation
+set autoindent                           "automatic indentation in non-C files
+set copyindent                           "copy the previous indentation on autoindenting
+
+set noerrorbells                         "don't make noise
+set visualbell
+set wildmenu                             "make tab completion act more like bash
+set wildmode=list:longest                "tab complete to longest common string, like bash
+set wildignore+=*.class,.git,.hg,.svn,test-integration/**,test-unit/**,**/target/**,**/build/**,**/vendor/**,**/node_modules**
+
+set hidden                               "allow hiding buffers with unsaved changes
+set cmdheight=2                          "make the command line a little taller to hide 'press enter to viem more' text
+
+
+" Turn backup off, since most stuff is in SVN, git anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" ----------- Visual Configuration ----------------------------------
+set t_Co=256
+colorscheme solarized
+set background=dark
+
+"Remove spaces at the end of lines
+command! RemoveEndSpaces :silent %s/ \+$//g
+
+" JSON hilighting
+au BufRead,BufNewFile *.json set filetype=json
+
+" Stop Vim dying is there's massively long lines
+set synmaxcol=250
+
+" Auto Command to resize VIM
+autocmd VimResized * wincmd =
